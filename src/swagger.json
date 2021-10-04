@@ -133,6 +133,36 @@
             }
           }
         }
+      },
+
+      "/user/list": {
+        "post": {
+          "summary": "Users list",
+          "tags": [
+            "Users"
+          ],
+          "description": "get users list",
+          "parameters": [
+
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "401": {
+              "description": "Unaothorize access."
+            },
+            "500": {
+              "description": "Somthing went wrong"
+            },
+            "201": {
+              "description": "No data found"
+            },
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
       }
 
 

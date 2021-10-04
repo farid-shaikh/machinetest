@@ -10,10 +10,10 @@ const varifyToken = require('../helper/varifyToken');
 const router = Router();
 
 
-//varifyToken
+
 router.post('/login', loginValidation(), AuthController.login);
 router.post('/signup', signUpValidation(), AuthController.signUp);
-
+router.post('/list', varifyToken, UserController.getUserList);
 
 
 
