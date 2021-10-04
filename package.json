@@ -1,0 +1,98 @@
+{
+  "name": "begig-user-service",
+  "version": "1.0.0",
+  "description": "begig user service apis",
+  "main": "./dist/src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "debug": "nodemon",
+    "lint": "./node_modules/.bin/tslint --project ./tsconfig.json -e 'src/test/**/*.*'",
+    "lint:fix": "./node_modules/.bin/tslint --project ./tsconfig.json -e 'src/test/**/*.*'  --fix",
+    "test": "ENV=test nyc mocha -r ts-node/register -r dotenv/config src/test/**/*.spec.ts --exit",
+    "coverage": ". && nyc -r text-summary -r html npm run test",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.ts",
+    "db:drop": "npm run typeorm:cli schema:drop",
+    "migration:generate": "typeorm migration:create -n",
+    "db:create": "ts-node src/script/create-db.ts",
+    "db:migrate": "npm run typeorm:cli migration:run",
+    "db:revert": "npm run typeorm:cli migration:revert",
+    "db:sync": "npm run typeorm:cli schema:sync && npm run db:migrate"
+  },
+  "keywords": [
+    "typescript",
+    "template"
+  ],
+  "license": "ISC",
+  "nyc": {
+    "cache": false,
+    "check-coverage": false,
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "coverage/**",
+      "src/test/**",
+      "src/config/environments",
+      "src/lib/interfaces",
+      "node_modules/**"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "sourceMap": false,
+    "reporter": [
+      "html",
+      "text-summary"
+    ],
+    "all": true,
+    "instrument": true
+  },
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "class-validator": "^0.11.0",
+    "core-decorators": "^0.20.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "date-fns": "^2.8.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "express-winston": "^4.0.2",
+    "fs": "0.0.1-security",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.1",
+    "path": "^0.12.7",
+    "socket.io": "^2.3.0",
+    "strong-params": "^1.0.0",
+    "swagger-ui-express": "^4.1.6",
+    "tslint-sonarts": "^1.9.0",
+    "typeorm": "^0.2.22",
+    "typescript": "^3.9.10",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/bluebird": "^3.5.29",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.2",
+    "@types/jsonwebtoken": "^8.5.4",
+    "@types/node": "^12.12.29",
+    "@types/validator": "^12.0.1",
+    "nock": "^11.7.0",
+    "nyc": "^14.1.1",
+    "supertest": "^4.0.2",
+    "ts-node": "^8.5.4",
+    "ts-node-dev": "^1.1.8",
+    "ts-sinon": "^1.0.24"
+  }
+}

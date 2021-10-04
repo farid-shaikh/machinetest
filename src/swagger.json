@@ -1,0 +1,144 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Machine Test",
+      "license": {
+        "name": "Farid"
+      }
+    },
+
+    "host": "localhost:8082",
+    "basePath": "/api/v1/",
+    "schemes": [
+      "http"
+    ],
+
+    "consumes": [
+      "application/json"
+    ],
+
+    "produces": [
+      "application/json"
+    ],
+
+    "securityDefinitions":{
+      "APIKeyHeader" :{
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+
+    "security": [
+      {
+        "APIKeyHeader": []
+      }
+    ],
+
+    "paths": {
+
+      "/user/login": {
+        "post": {
+          "summary": "login user",
+          "tags": [
+            "Auth"
+          ],
+          "description": "login user",
+          "parameters": [
+            {
+              "name": "login",
+              "in": "body",
+              "description": "login user",
+              "schema": {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "400": {
+              "description": "Bad request"
+            },
+            "500": {
+              "description": "Somthing went wrong"
+            },
+            "201": {
+              "description": "Invalid username or password"
+            },
+            "202": {
+              "description": "Account is blocked"
+            },
+            "200": {
+              "description": "Login successfully"
+            }
+          }
+        }
+      },
+
+      "/user/signup": {
+        "post": {
+          "summary": "signup user",
+          "tags": [
+            "Auth"
+          ],
+          "description": "signup user",
+          "parameters": [
+            {
+              "name": "signup",
+              "in": "body",
+              "description": "signup user",
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "mobile_no": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "400": {
+              "description": "Bad request"
+            },
+            "500": {
+              "description": "Somthing went wrong"
+            },
+            "201": {
+              "description": "This email is already taken"
+            },
+            "200": {
+              "description": "Signup successfully"
+            }
+          }
+        }
+      }
+
+
+
+
+    }
+
+
+  }
